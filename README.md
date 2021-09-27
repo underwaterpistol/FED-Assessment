@@ -15,6 +15,6 @@ We are evaluating:
 * How closely your submission follows the brief above
 * The responsiveness of your solution
 
-We are NOT looking for the fastest/shortest solution. We are not evaluating you on your design ability, however we do still want to see an actual product card. We recommend using VS Code for this assessment. The "Live Sass Compiler" extension will allow you to work in sass in realtime, and the Live Server extension will give you a realtime preview of your work.
+We are NOT looking for the fastest/shortest solution. We are not evaluating you on your design ability, however we do still want to see an actual product card. We recommend using VS Code for this assessment. The `Live Sass Compiler` extension will allow you to work in sass in realtime, and the `Live Server` extension will give you a realtime preview of your work.
 
 To get started you should fork off this repo. Once your work is complete, update the main branch on your fork and send it back to us.
