@@ -5,9 +5,64 @@ const Products = {
    * @param {Object} productsJson 
    */
   displayProducts: productsJson => {
+    let productArray = productsJson.data.products.edges;
+    if(productArray != null){
+      let productSection = document.getElementById("ProductSection");
+      productArray.forEach(product => {
+        let createdProduct = Products.createProductCard(product.node);
+        productSection.appendChild(createdProduct);
+      })
+    }
+  },
 
-    // Render the products here
+/**
+ * Takes a JSON representation of a singular product node.
+ * @param {Object} productNode 
+ * @returns Product card with relevant child elements.
+ */
+  createProductCard: productNode => {
 
+    const cardClass = "product-card";
+
+    let productCard = document.createElement("div");
+    productCard.setAttribute("class", cardClass);
+
+    let productCardImage = document.createElement("div");
+    productCardImage.setAttribute("class", `${cardClass}__image`);
+    let image = document.createElement("img")
+    image.setAttribute("src", productNode.images.edges[0].node.originalSrc)
+
+    productCardImage.appendChild(image);
+    productCard.appendChild(productCardImage);
+
+    let productCardTitle = document.createElement("p");
+    productCardTitle.setAttribute("class", `${cardClass}__title`);
+    productCardTitle.innerText = productNode.title;
+    productCard.appendChild(productCardTitle);
+
+    let productPrice = document.createElement("p");
+    productPrice.setAttribute("class", `${cardClass}__price`);
+    let priceInformation = productNode.priceRange.minVariantPrice;
+    productPrice.innerText = `${priceInformation.currencyCode === 'GBP' ? '£' : '$'}${priceInformation.amount}`;
+    productCard.appendChild(productPrice);
+
+    let productTags = document.createElement("div");
+    productTags.setAttribute("class", `${cardClass}__tags`);
+
+    productNode.tags.forEach(tag => {
+      let tagElement = document.createElement("div")
+      tagElement.setAttribute("class", "tag");
+      let tagText = document.createElement("p");
+      tagText.setAttribute("class", "tag__text");
+      tagText.innerText = `#${tag}`;
+
+      tagElement.appendChild(tagText);
+      productTags.appendChild(tagElement);
+    })
+
+    productCard.appendChild(productTags);
+
+    return productCard;
   },
 
   state: {
@@ -78,7 +133,6 @@ const Products = {
       fetchButton.addEventListener("click", Products.handleFetch);
     }
   }
-
 };
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -6,7 +6,7 @@ body {
 
 .title-bar {
   padding: 20px;
-  background-color: #EFEFEF;
+  background-color: #efefef;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -21,7 +21,7 @@ body {
 .title-bar__button {
   padding: 12px;
   background-color: #555555;
-  color: #FAFAFA;
+  color: #fafafa;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
   line-height: 14px;
@@ -35,5 +35,99 @@ body {
 
 .title-bar__button:hover {
   opacity: 75%;
+}
+
+.products {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.products .product-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #ebed99;
+  margin: 20px;
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+
+@media (min-width: 600px) {
+  .products .product-card {
+    max-width: 30%;
+  }
+}
+
+.products .product-card__title {
+  font-size: 20px;
+  font-weight: bolder;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.products .product-card__image > img {
+  height: 100px;
+  width: auto;
+  border-radius: 10px;
+  margin: 5px;
+}
+
+@media (min-width: 400px) {
+  .products .product-card__image > img {
+    height: 125px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .products .product-card__image > img {
+    height: 200px;
+  }
+}
+
+.products .product-card__tags {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.products .product-card__tags > .tag {
+  padding: 2px;
+  background-color: gray;
+  color: white;
+  margin: 2px;
+}
+
+.products .product-card__tags > .tag > p {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 5px;
+  text-transform: lowercase;
+}
+
+@media (min-width: 600px) {
+  .products {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
 }
 /*# sourceMappingURL=style.css.map */
