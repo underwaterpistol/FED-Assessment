@@ -12,7 +12,7 @@ const Products = {
 
     Object.values(productsJson.data.products.edges).forEach(edge => {
 
-      let product = edge['node']
+      const product = edge['node']
       const { title, images: {edges : [{node:{originalSrc}}]}, tags, priceRange:{minVariantPrice:{amount}}} = product
 
       const card = `<div class="card">
