@@ -7,6 +7,14 @@ const Products = {
   displayProducts: productsJson => {
 
     // Render the products here
+    Object.values(productsJson.data.products.edges).forEach(edge => {
+      let product = edge['node']
+      const { title, images: {edges : [{node:{originalSrc}}]}, tags, priceRange:{minVariantPrice:amount, currencyCode}} = product
+      console.log(title)
+      console.log(originalSrc)
+      console.log(tags)
+      console.log(amount,currencyCode)
+    });
 
   },
 
