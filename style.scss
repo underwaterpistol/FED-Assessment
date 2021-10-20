@@ -29,13 +29,44 @@ body {
 
 // Add your scss below this line
 
+#grid {
+  display: grid;
+  grid-column-gap: 1rem;
+  row-gap: 1rem;
+  padding: 2rem;
+  @media only screen and (min-width: 576px) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+  @media only screen and (min-width: 768px) {
+		grid-template-columns: repeat(3, 1fr);
+	}
+  @media only screen and (min-width: 1025px) {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
 .card{
-  .product__image {
-    img {
-      max-width: 100%;
+  background-color: #fe5b41;
+  font-family: Arial, Helvetica, sans-serif;
+
+  .product {
+    &__image {
+      margin:1px;
+      img {
+        max-width: 100%;
+      }
+    } 
+    &__info {
+      margin: 10px;
     }
-  }
-  h1 {
-    color: blue;
+    &__title {
+      height: 56px;
+    }
+    &__price {
+      font-size: 18px;;
+    }
+    &__tags{
+      text-transform: capitalize;
+    }
   }
 }
