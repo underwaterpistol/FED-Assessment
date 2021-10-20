@@ -28,3 +28,14 @@ body {
 }
 
 // Add your scss below this line
+
+.card{
+  .product__image {
+    img {
+      max-width: 100%;
+    }
+  }
+  h1 {
+    color: blue;
+  }
+}

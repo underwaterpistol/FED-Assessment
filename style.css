@@ -36,4 +36,12 @@ body {
 .title-bar__button:hover {
   opacity: 75%;
 }
+
+.card .product__image img {
+  max-width: 100%;
+}
+
+.card h1 {
+  color: blue;
+}
 /*# sourceMappingURL=style.css.map */
