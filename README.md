@@ -1,20 +1,16 @@
 # UWP Frontend Technical Assessment
+(Submitted by Mord Maman)
 
-This assessment is an opportunity for us to see how you approach a task and also how you execute it. In short, this task is to consume the response from a GraphQL request to the products endpoint, then generate and display at least 3 product cards from this information. Product cards should contain at a minimum:
-* An image
-* A title
-* A price
-* Product tags
+## Notes
 
-Since you have applied for a frontend position, we have supplied the GraphQL request for you and linked it to the fetch button already.
+After receiving the response, we run through each object recieved and deconstruct it to access the required properties.
 
-We are evaluating:
-* The readability of your code
-* How you utilize git 
-* How maintainable/conventional your code is
-* How closely your submission follows the brief above
-* The responsiveness of your solution
+These are then used to construct each card and set the HTML content on the page.
 
-We are NOT looking for the fastest/shortest solution. We are not evaluating you on your design ability, however we do still want to see an actual product card. We recommend using VS Code for this assessment. The `Live Sass Compiler` extension will allow you to work in sass in realtime, and the `Live Server` extension will give you a realtime preview of your work.
+The cards were then styled using CSS Grid for the layout, and BEM for the naming convention. 
 
-To get started you should fork off this repo. Once your work is complete, update the main branch on your fork and send it back to us.
+I did modify the query to return more than 3 products to see how the layout would respond and have left appropriate media queries to accomodate. I did return it back to 3 after checking.
+
+I noticed that upon repeated clicks of the fetchButton the amount of products would get longer, so I added a line on Line 11 in script.js to clear the innerHTML before adding the cards.  
+
+Thank you!
