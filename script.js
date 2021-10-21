@@ -4,50 +4,66 @@ const Products = {
    * Takes a JSON representation of the products and renders cards to the DOM
    * @param {Object} productsJson 
    */
-  displayProducts: productsJson => {
+  displayProducts(productsJson) {
 
     // Render the products here
-    // console.log(productsJson.data.products)
+    const productsData = productsJson.data.products.edges;
 
-    for (var i = 0; i < productsJson.data.products.edges.length; i++) {
-      var productImageSrc= productsJson.data.products.edges[i].node.images.edges[0].node.originalSrc;
-      var productTitleSrc = productsJson.data.products.edges[i].node.title;
-      var productDescSrc = productsJson.data.products.edges[i].node.descriptionHtml;
-      var productPriceSrc = productsJson.data.products.edges[i].node.priceRange.minVariantPrice.amount + ' ' + productsJson.data.products.edges[i].node.priceRange.minVariantPrice.currencyCode;
-      var productTagSrc = 'Tags: ' + productsJson.data.products.edges[i].node.tags[0];
-      var productVendorSrc = 'Vendor: ' + productsJson.data.products.edges[i].node.vendor;
-      var productTypeSrc = productsJson.data.products.edges[i].node.productType;
+    productsData.forEach((product) => this.createCard(product.node))
+  },
+
+    // Get the API data sources for later
+  createCard(product) {
+    const productObject = {
+      imageSrc: product.images.edges[0].node.originalSrc,
+      title: product.title,
+      desc: product.descriptionHtml,
+      price: `${product.priceRange.minVariantPrice.amount} ${product.priceRange.minVariantPrice.currencyCode}`,
+      tag: `Tags: ${product.tags[0]}`,
+      vendor: `Vendor: ${product.vendor}`,
+      type: product.productType,
+    }
+
+    this.createElements(productObject)
+  },
+
+    // Create HTML elements for our data and populate them.
+  createElements(product) {
+
+    const productImage = document.createElement('img');
+    productImage.src = product.imageSrc;
     
+    const productTitle = this.createElement('h2', product.title);
+    const productDesc = this.createElement('h3', product.desc);
+    const productPrice = this.createElement('p', product.price);
+    const productTag =  this.createElement('p', product.tag);
+    const productVendor = this.createElement('p', product.vendor);
+    const productType = this.createElement('p', product.type);
+    
+    this.attachElements([
+    productImage,
+    productTitle,
+    productDesc,
+    productPrice,
+    productTag,
+    productVendor,
+    productType,
+  ]);
+  },
+  createElement: (type, data) => {
+    const el = document.createElement(type);
+    el.innerHTML = data;
+    return el;
 
+  },
+    // Loop through our array from the previous steps and append the elements.
+  attachElements: (elements) => {
     const mainContainer = document.getElementById("Products-Container");
     const productHolder = document.createElement("div");
     productHolder.setAttribute( "class", "product-holder" );
-
-    const productImage = document.createElement("img");
-    productImage.src = productImageSrc;
-    const productTitle = document.createElement("h2");
-    productTitle.innerHTML = productTitleSrc;
-    const productDesc = document.createElement("h3");
-    productDesc.innerHTML = productDescSrc;
-    const productPrice = document.createElement("p");
-    productPrice.innerHTML = productPriceSrc;
-    const productTag = document.createElement("p");
-    productTag.innerHTML = productTagSrc;
-    const productVendor = document.createElement("p");
-    productVendor.innerHTML = productVendorSrc;
-    const productType = document.createElement("p");
-    productType.innerHTML = productTypeSrc;
-
-
-      mainContainer.appendChild(productHolder);
-      productHolder.appendChild(productImage);
-      productHolder.appendChild(productTitle);
-      productHolder.appendChild(productDesc);
-      productHolder.appendChild(productPrice);
-      productHolder.appendChild(productTag);
-      productHolder.appendChild(productVendor);
-      productHolder.appendChild(productType);
-     }
+    mainContainer.appendChild(productHolder);
+    
+    elements.forEach((el) => productHolder.appendChild(el));
   },
 
   state: {
