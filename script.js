@@ -12,9 +12,11 @@ const Products = {
     for (var i = 0; i < productsJson.data.products.edges.length; i++) {
       var productImageSrc= productsJson.data.products.edges[i].node.images.edges[0].node.originalSrc;
       var productTitleSrc = productsJson.data.products.edges[i].node.title;
+      var productDescSrc = productsJson.data.products.edges[i].node.descriptionHtml;
       var productPriceSrc = productsJson.data.products.edges[i].node.priceRange.minVariantPrice.amount + ' ' + productsJson.data.products.edges[i].node.priceRange.minVariantPrice.currencyCode;
       var productTagSrc = 'Tags: ' + productsJson.data.products.edges[i].node.tags[0];
-
+      var productVendorSrc = 'Vendor: ' + productsJson.data.products.edges[i].node.vendor;
+      var productTypeSrc = productsJson.data.products.edges[i].node.productType;
     
 
     const mainContainer = document.getElementById("Products-Container");
@@ -25,17 +27,26 @@ const Products = {
     productImage.src = productImageSrc;
     const productTitle = document.createElement("h2");
     productTitle.innerHTML = productTitleSrc;
+    const productDesc = document.createElement("h3");
+    productDesc.innerHTML = productDescSrc;
     const productPrice = document.createElement("p");
     productPrice.innerHTML = productPriceSrc;
     const productTag = document.createElement("p");
     productTag.innerHTML = productTagSrc;
+    const productVendor = document.createElement("p");
+    productVendor.innerHTML = productVendorSrc;
+    const productType = document.createElement("p");
+    productType.innerHTML = productTypeSrc;
 
 
       mainContainer.appendChild(productHolder);
       productHolder.appendChild(productImage);
       productHolder.appendChild(productTitle);
+      productHolder.appendChild(productDesc);
       productHolder.appendChild(productPrice);
       productHolder.appendChild(productTag);
+      productHolder.appendChild(productVendor);
+      productHolder.appendChild(productType);
      }
   },
 
@@ -59,6 +70,9 @@ const Products = {
             handle
             title
             tags
+            vendor
+            descriptionHtml
+            productType
             images(first:1) {
               edges {
                 node {
