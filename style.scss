@@ -28,3 +28,20 @@ body {
 }
 
 // Add your scss below this line
+#Products-Container {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.product-holder {
+  display: inherit;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  flex-basis: 33.3%;
+  img {
+    width:100%;
+    height: auto;
+  }
+}
