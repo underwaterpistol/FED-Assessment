@@ -7,7 +7,36 @@ const Products = {
   displayProducts: productsJson => {
 
     // Render the products here
+    // console.log(productsJson.data.products)
 
+    for (var i = 0; i < productsJson.data.products.edges.length; i++) {
+      var productImageSrc= productsJson.data.products.edges[i].node.images.edges[0].node.originalSrc;
+      var productTitleSrc = productsJson.data.products.edges[i].node.title;
+      var productPriceSrc = productsJson.data.products.edges[i].node.priceRange.minVariantPrice.amount + ' ' + productsJson.data.products.edges[i].node.priceRange.minVariantPrice.currencyCode;
+      var productTagSrc = 'Tags: ' + productsJson.data.products.edges[i].node.tags[0];
+
+    
+
+    const mainContainer = document.getElementById("Products-Container");
+    const productHolder = document.createElement("div");
+    productHolder.setAttribute( "class", "product-holder" );
+
+    const productImage = document.createElement("img");
+    productImage.src = productImageSrc;
+    const productTitle = document.createElement("h2");
+    productTitle.innerHTML = productTitleSrc;
+    const productPrice = document.createElement("p");
+    productPrice.innerHTML = productPriceSrc;
+    const productTag = document.createElement("p");
+    productTag.innerHTML = productTagSrc;
+
+
+      mainContainer.appendChild(productHolder);
+      productHolder.appendChild(productImage);
+      productHolder.appendChild(productTitle);
+      productHolder.appendChild(productPrice);
+      productHolder.appendChild(productTag);
+     }
   },
 
   state: {
