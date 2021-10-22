@@ -64,3 +64,22 @@ body {
     }
   }
 }
+#load-more {
+  text-decoration: none;
+  background: #000;
+  color: #fff;
+  padding: 1em;
+  background: linear-gradient(to left, #000 50%, salmon 50%) right;
+  background-size: 200%;
+  transition: .5s ease-out;
+  position: relative;
+  text-align: center;
+  max-width: 11%;
+  margin: auto;
+  display: block;
+  cursor: pointer;
+  margin-bottom: 2em;
+  &:hover {
+    background-position: left;
+  }
+}
