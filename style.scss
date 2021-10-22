@@ -33,15 +33,34 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
+  justify-content: space-evenly;
+  padding-top: 3em;
+  padding-bottom: 3em;
 }
 .product-holder {
   display: inherit;
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
-  flex-basis: 33.3%;
+  flex-basis: 20%;
+  padding: 2em;
+  margin: 2em;
+  -webkit-box-shadow: 0px 9px 13px -7px #000000;
+    box-shadow: 0px 9px 13px -7px #000000;
   img {
     width:100%;
     height: auto;
+  }
+  .cart-button {
+    text-decoration: none;
+    background: #000;
+    color: #fff;
+    padding: 1em;
+    background: linear-gradient(to left, #000 50%, salmon 50%) right;
+    background-size: 200%;
+    transition: .5s ease-out;
+    &:hover {
+      background-position: left;
+    }
   }
 }
