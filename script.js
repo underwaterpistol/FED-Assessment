@@ -30,24 +30,26 @@ const Products = {
     // Create HTML elements for our data and populate them.
   createElements(product) {
 
-    const productImage = document.createElement('img');
-    productImage.src = product.imageSrc;
-    
-    const productTitle = this.createElement('h2', product.title);
-    const productDesc = this.createElement('h3', product.desc);
-    const productPrice = this.createElement('p', product.price);
-    const productTag =  this.createElement('p', product.tag);
-    const productVendor = this.createElement('p', product.vendor);
-    const productType = this.createElement('p', product.type);
+    const image = document.createElement('img');
+    image.src = product.imageSrc;
+    const button = this.createElement('a', 'Add to Cart');
+    button.setAttribute( "class", "cart-button" );
+    button.href = '#';
+
+    const title = this.createElement('h2', product.title);
+    const desc = this.createElement('h3', product.desc);
+    const price = this.createElement('p', product.price);
+
+    const miscString =  [product.tag, product.type, product.vendor].join(' | ');
+    const misc =  this.createElement('p', miscString);
     
     this.attachElements([
-    productImage,
-    productTitle,
-    productDesc,
-    productPrice,
-    productTag,
-    productVendor,
-    productType,
+      image,
+      title,
+      desc,
+      misc,
+      price,
+      button,
   ]);
   },
   createElement: (type, data) => {
