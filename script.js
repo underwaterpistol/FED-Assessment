@@ -114,6 +114,7 @@ const Products = {
    * Fetches the products via GraphQL then runs the display function
    */
   handleFetch: async () => {
+    try {
     const productsResponse = await fetch(Products.state.storeUrl, {
       method: "POST",
       headers: {
@@ -127,6 +128,10 @@ const Products = {
     });
     const productsResponseJson = await productsResponse.json();
     Products.displayProducts(productsResponseJson);
+  }
+  catch (error) {
+    console.error(error);
+    }
   },
 
   /**
