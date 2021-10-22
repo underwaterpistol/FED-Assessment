@@ -9,11 +9,14 @@ const Products = {
     // Render the products here
     const productsData = productsJson.data.products.edges;
 
-    productsData.forEach((product) => this.createCard(product.node))
+    productsData.forEach((product) => this.createCard(product))
   },
 
     // Get the API data sources for later
   createCard(product) {
+
+    this.state.cursor = `"${product.cursor}"`;
+		product = product.node;
     const productObject = {
       imageSrc: product.images.edges[0].node.originalSrc,
       title: product.title,
@@ -59,75 +62,88 @@ const Products = {
 
   },
     // Loop through our array from the previous steps and append the elements.
-  attachElements: (elements) => {
+  attachElements(elements) {
     const mainContainer = document.getElementById("Products-Container");
     const productHolder = document.createElement("div");
     productHolder.setAttribute( "class", "product-holder" );
     mainContainer.appendChild(productHolder);
     
     elements.forEach((el) => productHolder.appendChild(el));
+    this.afterProductsRender();
+  },
+  afterProductsRender(){
+    if(this.state.productsRendered === false) {
+
+      const button = document.querySelector(".fetchButton");
+      button.innerHTML = 'Load More';
+      this.state.productsRendered = true
+    }
   },
 
   state: {
     storeUrl: "https://api-demo-store.myshopify.com/api/2020-07/graphql",
     contentType: "application/json",
     accept: "application/json",
-    accessToken: "b8385e410d5a37c05eead6c96e30ccb8"
+    accessToken: "b8385e410d5a37c05eead6c96e30ccb8",
+    cursor: null,
+    productsRendered: false
   },
 
   /**
    * Sets up the query string for the GraphQL request
    * @returns {String} A GraphQL query string
    */
-  query: () => `
-    {
-      products(first:3) {
-        edges {
-          node {
-            id
-            handle
-            title
-            tags
-            vendor
-            descriptionHtml
-            productType
-            images(first:1) {
-              edges {
-                node {
-                  originalSrc
+   query(cursor) {
+    return `{
+        products(first:3 after:${cursor}) {
+          edges {
+            node {
+              id
+              handle
+              title
+              tags
+              vendor
+              descriptionHtml
+              productType
+              images(first:1) {
+                edges {
+                  node {
+                    originalSrc
+                  }
+                }
+              }
+              priceRange {
+                minVariantPrice {
+                  amount
+                  currencyCode
                 }
               }
             }
-            priceRange {
-              minVariantPrice {
-                amount
-                currencyCode
-              }
-            }
+            cursor
           }
         }
-      }
-    }
-  `,
+      }`;
+    },
 
   /**
    * Fetches the products via GraphQL then runs the display function
    */
-  handleFetch: async () => {
+   async handleFetch(cursor = null) {
     try {
-    const productsResponse = await fetch(Products.state.storeUrl, {
+
+    const productsResponse = await fetch(this.state.storeUrl, {
       method: "POST",
       headers: {
-        "Content-Type": Products.state.contentType,
-        "Accept": Products.state.accept,
-        "X-Shopify-Storefront-Access-Token": Products.state.accessToken
+        "Content-Type": this.state.contentType,
+        "Accept": this.state.accept,
+        "X-Shopify-Storefront-Access-Token": this.state.accessToken
       }, 
       body: JSON.stringify({
-        query: Products.query()
+        query: this.query(cursor)
       })
     });
     const productsResponseJson = await productsResponse.json();
-    Products.displayProducts(productsResponseJson);
+    this.displayProducts(productsResponseJson);
   }
   catch (error) {
     console.error(error);
@@ -141,7 +157,7 @@ const Products = {
     // Add click handler to fetch button
     const fetchButton = document.querySelector(".fetchButton");
     if (fetchButton) {
-      fetchButton.addEventListener("click", Products.handleFetch);
+      fetchButton.addEventListener("click", function() { Products.handleFetch(Products.state.cursor) });
     }
   }
 
