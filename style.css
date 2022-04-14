@@ -36,4 +36,85 @@ body {
 .title-bar__button:hover {
   opacity: 75%;
 }
+
+#Products-Container {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 100%;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  padding-top: 3em;
+  padding-bottom: 3em;
+}
+
+.product-holder {
+  display: inherit;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-preferred-size: 20%;
+      flex-basis: 20%;
+  padding: 2em;
+  margin: 2em;
+  -webkit-box-shadow: 0px 9px 13px -7px #000000;
+  box-shadow: 0px 9px 13px -7px #000000;
+}
+
+.product-holder img {
+  width: 100%;
+  height: auto;
+}
+
+.product-holder .cart-button {
+  text-decoration: none;
+  background: #000;
+  color: #fff;
+  padding: 1em;
+  background: -webkit-gradient(linear, right top, left top, color-stop(50%, #000), color-stop(50%, salmon)) right;
+  background: linear-gradient(to left, #000 50%, salmon 50%) right;
+  background-size: 200%;
+  -webkit-transition: .5s ease-out;
+  transition: .5s ease-out;
+}
+
+.product-holder .cart-button:hover {
+  background-position: left;
+}
+
+#load-more {
+  text-decoration: none;
+  background: #000;
+  color: #fff;
+  padding: 1em;
+  background: -webkit-gradient(linear, right top, left top, color-stop(50%, #000), color-stop(50%, salmon)) right;
+  background: linear-gradient(to left, #000 50%, salmon 50%) right;
+  background-size: 200%;
+  -webkit-transition: .5s ease-out;
+  transition: .5s ease-out;
+  position: relative;
+  text-align: center;
+  max-width: 11%;
+  margin: auto;
+  display: block;
+  cursor: pointer;
+  margin-bottom: 2em;
+}
+
+#load-more:hover {
+  background-position: left;
+}
 /*# sourceMappingURL=style.css.map */
